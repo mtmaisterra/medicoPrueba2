@@ -20,11 +20,11 @@ public class Medico implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "Nombre", length = 20, nullable = false)
+    @Column(name = "Nombre", length = 50, nullable = false)
     private String nombre;
-    @Column(name = "Apellido", length = 20, nullable = false)
+    @Column(name = "Apellido", length = 50, nullable = false)
     private String apellido;
-    @Column(name = "Especialidad", length = 20, nullable = false)
+    @Column(name = "Especialidad", length = 50, nullable = false)
     private String especialidad;
     @OneToMany
     private Set<Turno> turnos;

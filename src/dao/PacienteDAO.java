@@ -22,7 +22,12 @@ public class PacienteDAO extends DAO{
 
     public void borrar(Long documento) {
         Paciente paciente = em.find(Paciente.class, documento);
-        super.delete(paciente);
+        if (paciente == null) {
+            System.out.println("No existe el paciente con ese documento");
+        } else {
+            super.delete(paciente);
+            System.out.println("El paciente se eliminó con éxito");
+        }
     }   
 
     private Paciente findId(Long documento) {

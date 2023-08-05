@@ -26,8 +26,13 @@ public class TurnoDAO extends DAO {
     }
 
     public void borrar(Long id) {
-        Turno turno = em.find(Turno.class, id);
-        super.delete(turno);
+         Turno turno = em.find(Turno.class, id);
+        if (turno == null) {
+            System.out.println("No existe el turno con ese id");
+        } else {
+            super.delete(turno);
+            System.out.println("El turno se eliminó con éxito");
+        }
     }   
 
     private Turno findId(Long id) {
@@ -41,7 +46,7 @@ public class TurnoDAO extends DAO {
         super.conect();
          System.out.println("Ingrese el día a buscar");
          String dia = leer.next();
-        List<Turno> turnos = em.createQuery("SELECT t FROM Turno t.dia =:dia", Turno.class).setParameter("dia", dia.toString()).getResultList();
+        List<Turno> turnos = em.createQuery("SELECT t FROM Turno t WHERE t.dia =:dia", Turno.class).setParameter("dia", dia.toString()).getResultList();
         super.disconect();
         return turnos;
         /*NamedQuery permite ver una consulta ordenada*/
@@ -49,7 +54,7 @@ public class TurnoDAO extends DAO {
      public List<Turno> listarTurnoPorMedico() {
         super.conect();
         String medico = leer.next();
-        List<Turno> turnos = em.createQuery("SELECT t FROM Turno t.medico =:medico", Turno.class).getResultList();
+        List<Turno> turnos = em.createQuery("SELECT t FROM Turno t WHERE t.medico =:medico", Turno.class).getResultList();
         super.disconect();
         return turnos;
         /*NamedQuery permite ver una consulta ordenada*/

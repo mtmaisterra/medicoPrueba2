@@ -22,7 +22,7 @@ public class MedicoDAO extends DAO {
     }
 
     public void borrarMedico(Long id) {
-        //   Medico medico = /findId(id);
+
         Medico medico = em.find(Medico.class, id);
         if (medico == null) {
             System.out.println("No existe el médico con ese id");
@@ -58,10 +58,17 @@ public class MedicoDAO extends DAO {
         super.conect();
         System.out.println("Ingrese la especialidad a mostrar");
         String especialidad = leer.next();
-        Medico medico = em.createQuery("SELECT  m FROM Medico m WHERE  m.especialidad = :especialidad LIMIT 1",
-                Medico.class).setParameter("especialidad", especialidad).getSingleResult();
+        Collection<Medico> medico = em.createQuery("SELECT  m FROM Medico m WHERE  m.especialidad = :especialidad").
+                setParameter("especialidad", especialidad).getResultList();
+        if (medico.isEmpty()) {
+            System.out.println("No existe el médico con esa especialidad");
+        } else {
+            medico.forEach((medico1) -> {
+                System.out.println(medico1.toString());
+            });
+        }
         super.disconect();
-        return medico;
+        return (Medico) medico;
     }
 
     public Collection<Medico> buscarPorApellido() {
@@ -74,9 +81,9 @@ public class MedicoDAO extends DAO {
             System.out.println("No existe el médico con ese apellido");
 
         } else {
-            for (Medico medico1 : medico) {
+            medico.forEach((medico1) -> {
                 System.out.println(medico1.toString());
-            }
+            });
         }
         super.disconect();
         return medico;

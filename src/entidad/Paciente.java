@@ -26,20 +26,20 @@ public class Paciente implements Serializable {
 
     @Id
     private Long documento;
-    @Column(name = "Nombre", length = 20, nullable = false)
+    @Column(name = "Nombre", length = 50, nullable = false)
     private String nombre;
-    @Column(name = "Apellido", length = 20, nullable = false)
+    @Column(name = "Apellido", length = 50, nullable = false)
     private String apellido;
-    @Column(name="Fecha_Nacimiento", length = 12, nullable= false)
+    @Column(name="Fecha_Nacimiento", length = 20, nullable= false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaNac;
-    @Column(name = "Edad", length = 5, nullable = false)
+    @Column(name = "Edad", length = 20, nullable = false)
         private int edad;
-    @Column(name = "Obra_Social", length = 20, nullable = false)
+    @Column(name = "Obra_Social", length = 50, nullable = false)
     private String obraSocial;
-    @Column(name = "Patología", length = 20, nullable = false)
+    @Column(name = "Patología", length = 50, nullable = false)
     private String patologia;
-    @Column(name = "Medicación", length = 20, nullable = false)
+    @Column(name = "Medicación", length = 50, nullable = false)
     private String medicacion;
     
 @OneToMany
